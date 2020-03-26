@@ -1,0 +1,14 @@
+<% @posts.each do |post|%>
+<div class="card md-12 mb-3">
+  <div class="card-body">
+    <h5 class="card-title"><%=post.title %></h5>
+    <p class="card-text"><%=post.content%></p>
+    <p class="card-text"><%=post.user.name%></p>
+    
+    <a href="<%=edit_post_path(post) %>" class="btn btn-primary">Update</a>
+         <%= link_to "show" , post ,class:"btn btn-info" %>
+    <%= link_to 'delete', post , method: :delete, class:"btn btn-danger"%>
+  
+  </div>
+</div>
+<% end %>

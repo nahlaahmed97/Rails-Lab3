@@ -1,0 +1,38 @@
+<h1>Post</h1>
+<div class="card md-12 md-3">
+    <div class="card-body">
+        <h4 class="card-title"><%= @post.title %></h4>
+        <p class="card-text"><%= @post.content%> </p>
+        <p class="card-text">
+            <strong>Last Update:</strong>
+            <%= @post.updated_at%> 
+        </p>
+        
+    </div>
+</div>
+<h1>Comments</h1>
+<%= form_with(url: "/comments", method: "post") do %>
+    <div class="form-group">
+        <%= text_area_tag(:comment, nil, rows: 3, class: "form-control") %>
+         <%= hidden_field_tag 'post_id', @post.id %>
+    </div>
+    <%= submit_tag( "Comment", class: "btn btn-primary btn-block") %>
+<% end %>
+<br>
+<% if @post.comments.any? %>
+    <% @post.comments.each do |comment| %>
+<div class="card md-12 mb-3">
+  <div class="card-body">
+    <h5 class="card-title"><%=comment.content%></h5>
+     <%= link_to 'delete', comment, class: "btn btn-danger", method: :delete%>
+            </div>
+        </div>
+        <br>
+    <% end %>
+<% else %>
+    <div class="card md-12 md-3">
+        <div class="card-header">
+            No Comments
+        </div>
+    </div>
+<% end %>
